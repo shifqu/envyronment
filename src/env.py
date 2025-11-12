@@ -5,7 +5,7 @@ from collections.abc import Callable
 from typing import TypeVar
 
 try:
-    from dotenv import load_dotenv
+    from dotenv import load_dotenv  # type: ignore[reportMissingImports]
 except ImportError:
     """Could not import dotenv.load_dotenv."""
 else:
