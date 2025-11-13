@@ -1,4 +1,18 @@
-"""A tiny module to read environment variables and tranform them."""
+"""A tiny module to read environment variables and tranform them.
+
+Examples::
+    >>> import envyronment as env
+    >>> import os
+    >>> os.environ["MY_INT"] = "42"
+    >>> env.read("MY_INT", astype=int)
+    42
+    >>> env.read("MY_STR", default="default_value")
+    'default_value'
+    >>> env.read("MY_STR")
+    Traceback (most recent call last):
+        ...
+    envyronment.MissingEnvironmentVariableError: Environment variable MY_STR is not set.
+"""
 
 import os
 from collections.abc import Callable
