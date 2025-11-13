@@ -22,9 +22,9 @@ When load_dotenv is available, this is called at import time.
 - ✅ Propagates errors raised in the `astype` callable
 - ✅ Zero dependencies required, `python-dotenv` optionally installed
 
-## Requirements (officially supported)
+## Requirements
 
-- Python **3.13**
+- Python **3.10+** (only **3.13** is tested)
 
 ## Quick start
 
