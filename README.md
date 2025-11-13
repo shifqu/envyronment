@@ -39,7 +39,7 @@ When load_dotenv is available, this is called at import time.
 
 2. Import and use
     ```python
-    import env
+    import envyronment as env
 
     ascii_asterisk = env.read("ASCII_ASTERISK", 42, astype=int)  # typed as int, 42 by default
     debug = env.read("DEBUG", astype=bool)  # typed as bool, required

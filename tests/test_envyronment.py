@@ -8,11 +8,11 @@ from unittest.mock import Mock, patch
 
 
 class EnvTests(unittest.TestCase):
-    """Tests for env.py module."""
+    """Tests for envyronment.py module."""
 
     def setUp(self):
         """Set up test environment."""
-        self.env_module = importlib.import_module("env")
+        self.env_module = importlib.import_module("envyronment")
 
     def test_read_existing_variable(self):
         """Test reading an existing environment variable."""
@@ -44,7 +44,7 @@ class EnvLoadDotenvTests(unittest.TestCase):
 
     def setUp(self):
         """Set up test environment."""
-        sys.modules.pop("env", None)  # Ensure our module isn't already imported
+        sys.modules.pop("envyronment", None)  # Ensure our module isn't already imported
 
     def test_load_dotenv_called_if_available(self):
         """Test that load_dotenv() is called if python-dotenv is available."""
@@ -52,11 +52,11 @@ class EnvLoadDotenvTests(unittest.TestCase):
         fake_dotenv.load_dotenv = Mock()
 
         with patch.dict(sys.modules, {"dotenv": fake_dotenv}):
-            import env  # noqa: F401
+            import envyronment  # noqa: F401
 
         fake_dotenv.load_dotenv.assert_called_once()
 
     def test_no_dotenv_import(self):
         """Test that module still imports if python-dotenv is missing."""
         with patch.dict(sys.modules, {"dotenv": None}):
-            import env  # noqa: F401
+            import envyronment  # noqa: F401
