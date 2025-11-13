@@ -80,8 +80,9 @@ garden_tools = env.read("GARDEN_TOOLS", astype=env.to_list)
 # dict (due to input format), required, value={"flowers": ["rose", "tulip"], "vegetables": ["carrot", "tomato"]}
 garden_plan = env.read("GARDEN_PLAN", astype=env.to_json)
 
-# Path, required, parent directories created, no error if it already existed, value=/var/log/garden/plants.log
-plant_log = env.read("PLANT_LOG", astype=env.to_filepath)
+# Path, optional, parent directories created, no error if it already existed, value=/var/log/garden/plants.log
+# ⚠️ Default value is a string because `convert_default=True` to ensure the path is created whether default or the env value is used.
+plant_log = env.read("PLANT_LOG", "/tmp/log/garden/plants.log", astype=env.to_filepath, convert_default=True)
 
 # Path, required, parent directories created, no error if it already existed, value=/src/greenhouse
 greenhouse = env.read("GREENHOUSE_DIR", astype=env.to_dirpath)
