@@ -125,6 +125,18 @@ class EnvTests(unittest.TestCase):
             self.assertEqual(str(result_nested_dir), nested_dirpath_str)
             self.assertTrue(nested_dirpath.is_dir())
 
+    def test_convert_default_arg(self):
+        """Test that the default argument is also converted when convert_default is True."""
+        with patch.dict("os.environ", {}, clear=True):
+            result_converted = self.env_module.read(
+                "MISSING_VAR", default="true", astype=self.env_module.to_bool, convert_default=True
+            )
+            self.assertTrue(result_converted)
+            result_as_is = self.env_module.read(
+                "MISSING_VAR", default="true", astype=self.env_module.to_bool, convert_default=False
+            )
+            self.assertEqual(result_as_is, "true")
+
 
 class EnvLoadDotenvTests(unittest.TestCase):
     """Tests for env.py module."""

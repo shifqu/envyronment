@@ -41,10 +41,12 @@ class _Missing:
 _MISSING = _Missing()
 
 
-def read(name: str, default: T | _Missing = _MISSING, *, astype: Callable[..., T] = str) -> T:
+def read(
+    name: str, default: T | _Missing = _MISSING, *, astype: Callable[..., T] = str, convert_default: bool = False
+) -> T:
     """Read a value from the environment and call astype with the value as argument.
 
-    If the default is returned, it will be returned as provided.
+    The default value will be converted using astype if convert_default is True.
     A MissingEnvironmentVariableError will be raised if the environment variable is not set and no default is provided.
 
     Errors raised by astype will propagate to the caller.
@@ -56,6 +58,8 @@ def read(name: str, default: T | _Missing = _MISSING, *, astype: Callable[..., T
     except KeyError as exc:
         if isinstance(default, _Missing):
             raise MissingEnvironmentVariableError(f"Environment variable {name} is not set.") from exc
+        if convert_default:
+            return astype(default)
         return default
     return astype(value)
 
